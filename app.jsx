@@ -2,6 +2,7 @@ class Model {
     constructor() {
         this.comments = [];
         this.inputValue = null;
+        this.inputValue2= null;
         this.callback = null;
     }
     subscribe(render) {
@@ -13,10 +14,11 @@ class Model {
     }
     addComments() {
     console.log(this.inputValue.value);
-    if(this.inputValue!= null && this.inputValue.value !=''){
+    if(this.inputValue!= null && this.inputValue.value !='' && this.inputValue2!=null){
         this.comments.push({
             name: this.inputValue.value,
             id: Utils.uuid(),
+            person: this.inputValue2.value
         });
         this.inputValue.value = '';
         this.notify();
@@ -30,18 +32,12 @@ class Model {
         this.notify();
     }
 
-    clickCheckbox(e, index){
-      this.comments[index].clase= (e.target.checked) ? "responded": "";
-      this.notify();
-    }
+
 }
-const CommentsList = ({
-        title,
-        model
-    }) => {return ( <ul> {
+const CommentsList = ({title, model}) => {return ( <ul> {
                 model.comments.map((commentId, index) => {
                     return <li  key = {commentId.id} className={commentId.clase}> 
-                            {commentId.name}<br/>
+                    {commentId.person}<br/>{commentId.name}<br/>
                     <button onClick = { () => model.deleteComments(commentId.id)
                         } > Remove Comment </button>
                            </li> ;
@@ -58,9 +54,10 @@ const CommentsApp = ({title,model}) => {
                         model.addComments()
                     }
                 } >
-                <input type = "text"
-                placeholder = "comment"
-                onChange = {
+                <input type = "text" placeholder = "name"onChange = {
+                    e => (model.inputValue2 = e.target)
+                }/>
+                <input type = "text" placeholder = "comment"onChange = {
                     e => (model.inputValue = e.target)
                 }/>
                 <button type = "submit" > Submit </button> </form> </header>
