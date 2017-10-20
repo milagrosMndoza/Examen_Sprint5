@@ -114,7 +114,11 @@ li button:last-child {
   box-shadow: 0 0 26px rgba(0,0,0, .13);
 }
 
-
+/*Contador de comentarios*/
+.countComments{
+margin: 0 auto;
+bottom:2%;
+}
 
 /* responded */
 .responded {

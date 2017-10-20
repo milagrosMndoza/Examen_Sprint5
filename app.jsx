@@ -47,7 +47,7 @@ class Model {
 const CommentsList = ({title, model}) => {return ( <ul> {
                 model.comments.map((commentId, index) => {
                     return <li  key = {commentId.id} className={commentId.clase}> 
-                    {commentId.nombre}<br/>{commentId.comentario}<br/>
+                   <h3> <b>{commentId.nombre}</b></h3>{commentId.comentario}<br/>
                     <button onClick = { () => model.deleteComments(commentId.id)
                         } > Remove Comment </button>
                            </li> ;
@@ -72,8 +72,8 @@ const CommentsApp = ({title,model}) => {
                 }/>
                 <button type = "submit" > Submit </button> </form> </header>
                  <div className = "main" >
-                <h2> My coments </h2> 
-                <h3>{model.comments.length}</h3><span>comments</span>
+                <h2> My coments </h2> <br/>
+                <div className="countComments"><strong><span className="">{model.comments.length}   comments</span></strong></div>
                 <CommentsList model = {model}/>
 
                  </div>
