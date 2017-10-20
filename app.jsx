@@ -16,13 +16,16 @@ class Model {
     console.log(this.inputValue.value);
     if(this.inputValue!= null && this.inputValue.value !='' && this.inputValue2!=null){
         this.comments.push({
-            name: this.inputValue.value,
-            id: Utils.uuid(),
-            person: this.inputValue2.value
+            nombre: this.inputValue2.value,
+            comentario: this.inputValue.value,
+            id: Utils.uuid()
+            
         });
+        console.log(this.comments)
         this.inputValue.value = '';
+        this.inputValue2.value = '';
         this.notify();
-    }
+        }
     }
     deleteComments(id) {
         for (let i in this.comments)
@@ -34,10 +37,17 @@ class Model {
 
 
 }
+
+// const contador = ({title, model}) => {
+//     return( <div>
+//     <h1>{model.comments.length}</h1>
+//     </div>)
+
+// }
 const CommentsList = ({title, model}) => {return ( <ul> {
                 model.comments.map((commentId, index) => {
                     return <li  key = {commentId.id} className={commentId.clase}> 
-                    {commentId.person}<br/>{commentId.name}<br/>
+                    {commentId.nombre}<br/>{commentId.comentario}<br/>
                     <button onClick = { () => model.deleteComments(commentId.id)
                         } > Remove Comment </button>
                            </li> ;
@@ -62,9 +72,11 @@ const CommentsApp = ({title,model}) => {
                 }/>
                 <button type = "submit" > Submit </button> </form> </header>
                  <div className = "main" >
-                < h2 > My coments </h2> <
-                CommentsList model = {model}
-                /> </div>
+                <h2> My coments </h2> 
+                <h3>{model.comments.length}</h3><span>comments</span>
+                <CommentsList model = {model}/>
+
+                 </div>
             </div>
             );
         }
